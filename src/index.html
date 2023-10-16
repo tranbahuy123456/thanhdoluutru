@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+     <meta charset="UTF-8">
+     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+     <title>Document</title>
+</head>
+<body>
+     <div>
+          <h3>Chọn nhiệm vụ cho role</h3>
+          <div>
+               <select name=""  id="role" onchange="loadTask()">
+                    <option value="Chọn role" disabled selected></option>
+               </select>
+          </div>
+          <div>
+               <br>
+               <span id="task"></span>
+               <span id="OnTask" ></span>
+
+
+          </div>
+         
+
+
+
+     </div>
+     <script>
+          fetch('http://localhost:8080/role').then(res=>res.json()).then(data=>{
+               data.forEach(element => {
+                    const option=document.createElement('option');
+                    option.value=element.name;
+                    option.text=element.name;
+                    document.getElementById('role').appendChild(option) 
+               });
+          })
+          function loadTask(){
+               const role=document.getElementById('role').value;
+               document.getElementById('OnTask').innerHTML="";
+               document.getElementById('task').innerHTML="";
+               var listItem=[];
+               fetch('http://localhost:8080/role?role='+role).then(res=>res.json()).then(data=>{
+                    data['task'].forEach(element => {
+                         // var text=`<button style='padding:5px;margin:5px;color:green;border:1px green solid' >`+element+`</button>`
+                         // document.getElementById('OnTask').innerHTML+=text
+                         listItem.push(element)
+
+                    });
+               })
+               fetch('http://localhost:8080/task').then(res=>res.json()).then(data=>{
+                    data.forEach(element => {
+                         if(!listItem.includes(element._id)){
+                              document.getElementById('task').innerHTML+=`<button id="btn_`+element._id+`" style='padding:5px;margin:5px;color:#f00;border:1px #f00 solid' onclick="actionTask('add','`+element._id+`')">`+element.name+`</button>`
+                         }
+                         else{
+                              document.getElementById('task').innerHTML+=`<button id="btn_`+element._id+`" style='padding:5px;margin:5px;color:green;border:1px green solid' onclick="actionTask('delete','`+element._id+`')">`+element.name+`</button>`
+                         }
+                    });
+               })
+
+          }
+          function actionTask(type,id){
+               const role=document.getElementById('role').value;
+               const xhr = new XMLHttpRequest();
+               var obj=document.getElementById('btn_'+id)
+               if(obj.style.color=='#f22' || obj.style.color=='rgb(255, 0, 0)' || obj.style.color=='rgb(255, 34, 34)'){
+                    obj.style.color='green';
+                    obj.style.borderColor='green';
+               }
+               else{
+                    obj.style.color='#f22';
+                    obj.style.borderColor='#f22';
+               }
+               xhr.open('GET', 'http://localhost:8080/task?type='+type+'&task='+id+'&role='+role, true); 
+               xhr.send();
+          }
+        
+     </script>
+</body>
+</html>

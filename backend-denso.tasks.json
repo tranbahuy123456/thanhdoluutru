@@ -1,0 +1,18 @@
+[{
+  "_id": {
+    "$oid": "652b3456d4e437f72fa21977"
+  },
+  "name": "Thêm xoá bài đăng"
+},
+{
+  "_id": {
+    "$oid": "652b3462d4e437f72fa21979"
+  },
+  "name": "Quản lí nhân viên"
+},
+{
+  "_id": {
+    "$oid": "652b346ed4e437f72fa2197b"
+  },
+  "name": "Quản lí tài chính"
+}]

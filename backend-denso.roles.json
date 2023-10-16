@@ -1,0 +1,28 @@
+[{
+  "_id": {
+    "$oid": "652b388a60aee8acfa6c83a3"
+  },
+  "name": "admin",
+  "task": [
+    "652b3462d4e437f72fa21979",
+    "652b346ed4e437f72fa2197b"
+  ]
+},
+{
+  "_id": {
+    "$oid": "652b52ac60aee8acfa6c83ab"
+  },
+  "name": "user",
+  "task": [
+    "652b3456d4e437f72fa21977"
+  ]
+},
+{
+  "_id": {
+    "$oid": "652b52b460aee8acfa6c83ad"
+  },
+  "name": "manager",
+  "task": [
+    "652b346ed4e437f72fa2197b"
+  ]
+}]
